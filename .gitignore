@@ -1,13 +1,10 @@
 # Local design docs — not shipped
 docs/
-CLAUDE.md
 
 # Editor / OS
 .DS_Store
 .vscode/
 .idea/
 
-# Tooling state
-.claude/
-.remember/
+# Dependencies
 node_modules/
