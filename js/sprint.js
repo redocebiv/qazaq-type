@@ -38,7 +38,11 @@ export function startSprint({ root, settings, onHud, onEnd }) {
   }
 
   function pushHud() {
-    onHud({ time: Math.ceil(remaining), words: wordsDone, wpm: wpm(correctKeys, elapsed()) });
+    // Clamp the divisor: in the first second the live figure is dividing by
+    // almost nothing and reads as nonsense. The final score always uses the
+    // full duration, so only this running display needs the floor.
+    const seconds = Math.max(elapsed(), 3);
+    onHud({ time: Math.ceil(remaining), words: wordsDone, wpm: wpm(correctKeys, seconds) });
   }
 
   function nextWord() {
