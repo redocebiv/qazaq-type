@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Qazaq Type — Kazakh Latin alphabet typing game</title>
+<meta name="description" content="A browser typing game for the 31-letter Kazakh Latin alphabet adopted in 2021. Kazakh words fall in Cyrillic, you type them in Latin. No Kazakh keyboard needed.">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="Qazaq Type">
+<meta property="og:description" content="Learn to type the 2021 Kazakh Latin alphabet. A typing game that runs in your browser.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23e8b64c'>Ş</text></svg>">
+</head>
+<body>
+
+<div id="ornament-layer"></div>
+
+<header class="topbar">
+  <a class="brand" href="./">
+    <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><use href="#horn"/></svg>
+    <span class="brand-text">
+      <span class="brand-name">Qazaq Type</span>
+      <span class="brand-tag" data-i18n="app.tagline"></span>
+    </span>
+  </a>
+  <div class="toolbar">
+    <button id="lang-toggle" class="chip" type="button">EN</button>
+    <button id="sound-toggle" class="chip" type="button" data-i18n-label="settings.sound">
+      <span class="chip-icon" aria-hidden="true">♪</span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- Menu -->
+  <section id="screen-menu" class="screen">
+    <div class="cards">
+      <button class="card" type="button" data-mode="arcade">
+        <span class="card-title" data-i18n="menu.arcade"></span>
+        <span class="card-desc" data-i18n="menu.arcadeDesc"></span>
+        <span class="card-best"><span data-i18n="menu.best"></span> <b data-best="arcade">0</b></span>
+      </button>
+      <button class="card" type="button" data-mode="sprint">
+        <span class="card-title" data-i18n="menu.sprint"></span>
+        <span class="card-desc" data-i18n="menu.sprintDesc"></span>
+        <span class="card-best"><span data-i18n="menu.best"></span> <b data-best="sprint">0</b></span>
+      </button>
+      <button class="card card-quiet" type="button" data-screen="alphabet">
+        <span class="card-title" data-i18n="menu.alphabet"></span>
+        <span class="card-desc" data-i18n="menu.alphabetDesc"></span>
+      </button>
+    </div>
+
+    <div id="menu-divider"></div>
+
+    <div class="panels">
+      <section class="panel">
+        <h2 data-i18n="settings.title"></h2>
+        <label class="switch">
+          <input type="checkbox" id="opt-strict">
+          <span class="switch-body">
+            <span class="switch-name" data-i18n="settings.strict"></span>
+            <span class="switch-desc" data-i18n="settings.strictDesc"></span>
+          </span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="opt-hint">
+          <span class="switch-body">
+            <span class="switch-name" data-i18n="settings.hint"></span>
+            <span class="switch-desc" data-i18n="settings.hintDesc"></span>
+          </span>
+        </label>
+      </section>
+
+      <section class="panel">
+        <h2 data-i18n="menu.how"></h2>
+        <p class="how-body" data-i18n="menu.howBody"></p>
+      </section>
+    </div>
+  </section>
+
+  <!-- Game -->
+  <section id="screen-game" class="screen" hidden>
+    <div class="hud" id="hud" aria-live="polite"></div>
+    <div class="playfield-wrap">
+      <div id="playfield" class="playfield"></div>
+      <p class="tap-hint" data-i18n="game.tapToType"></p>
+    </div>
+    <button id="quit" class="ghost-btn" type="button" data-i18n="game.quit"></button>
+  </section>
+
+  <!-- Alphabet -->
+  <section id="screen-alphabet" class="screen" hidden>
+    <h2 class="screen-title" data-i18n="alphabet.title"></h2>
+    <p class="screen-sub" data-i18n="alphabet.subtitle"></p>
+    <div id="alphabet-body"></div>
+    <button class="ghost-btn" type="button" data-screen="menu" data-i18n="common.back"></button>
+  </section>
+
+  <!-- Results -->
+  <section id="screen-results" class="screen" hidden>
+    <div class="result-card">
+      <h2 id="result-title" class="screen-title"></h2>
+      <p id="result-best" class="result-best" data-i18n="results.newBest" hidden></p>
+      <dl id="result-stats" class="result-stats"></dl>
+      <div class="result-actions">
+        <button id="result-again" class="primary-btn" type="button" data-i18n="results.again"></button>
+        <button class="ghost-btn" type="button" data-screen="menu" data-i18n="results.menu"></button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>Qazaq Type</span>
+  <span aria-hidden="true">·</span>
+  <a href="https://github.com/redocebiv/qazaq-type">Source</a>
+</footer>
+
+<!-- Single keystroke source: works with desktop and mobile keyboards alike. -->
+<input id="capture" class="capture" type="text" autocomplete="off" autocorrect="off"
+       autocapitalize="none" spellcheck="false" inputmode="text" aria-hidden="true" tabindex="-1">
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
