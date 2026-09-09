@@ -1,0 +1,11 @@
+{
+  "name": "qazaq-type",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Kazakh Latin alphabet typing game",
+  "scripts": {
+    "test": "node tests/translit.test.mjs",
+    "serve": "python3 -m http.server 8000"
+  }
+}
